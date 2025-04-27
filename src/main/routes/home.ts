@@ -1,16 +1,21 @@
-import { Application } from 'express';
+import taskRoutes from './taskRoutes';
+
 import axios from 'axios';
+import { Application } from 'express';
+
 
 export default function (app: Application): void {
+  // Render the home page with a list of tasks
   app.get('/', async (req, res) => {
     try {
-      // An example of connecting to the backend (a starting point)
-      const response = await axios.get('http://localhost:4000/get-example-case');
-      console.log(response.data);
-      res.render('home', { "example": response.data });
+      const response = await axios.get('http://localhost:4000/tasks/');
+      res.render('home', { 'tasks': response.data });
     } catch (error) {
-      console.error('Error making request:', error);
-      res.render('home', {});
+      console.error('Error fetching tasks:', error);
+      res.render('home', { 'tasks': [] });
     }
   });
+
+  // Use task routes (handles /tasks-related routes)
+  taskRoutes(app);
 }

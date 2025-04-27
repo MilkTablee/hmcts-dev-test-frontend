@@ -10,6 +10,11 @@ const fileNameSuffix = devMode ? '-dev' : '.[contenthash]';
 const filename = `[name]${fileNameSuffix}.js`;
 
 module.exports = {
+  devServer: {
+    contentBase: path.join(__dirname, 'public'),
+    hot: true, // Enable Hot Module Replacement
+    open: true, // Automatically open the browser
+  },
   plugins: [...govukFrontend.plugins, ...scss.plugins, ...HtmlWebpack.plugins],
   entry: path.resolve(sourcePath, 'index.ts'),
   mode: devMode ? 'development' : 'production',

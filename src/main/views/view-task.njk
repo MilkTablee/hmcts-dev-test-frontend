@@ -1,0 +1,36 @@
+{% extends "template.njk" %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">Task Details</h1>
+
+  <div class="govuk-summary-list">
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">Case Number</dt>
+      <dd class="govuk-summary-list__value">{{ task.caseNumber }}</dd>
+    </div>
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">Title</dt>
+      <dd class="govuk-summary-list__value">{{ task.title }}</dd>
+    </div>
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">Description</dt>
+      <dd class="govuk-summary-list__value">{{ task.description or 'Not provided' }}</dd>
+    </div>
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">Due Date</dt>
+      <dd class="govuk-summary-list__value">{{ formattedDueDate }}</dd>
+    </div>
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">Status</dt>
+      <dd class="govuk-summary-list__value">{{ task.status }}</dd>
+    </div>
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">Created Date</dt>
+      <dd class="govuk-summary-list__value">{{ formattedCreatedDate }}</dd>
+    </div>
+  </div>
+
+  <a href="/tasks/{{ task.id }}/edit" class="govuk-link">Edit Task</a><br>
+  <a href="/tasks/{{ task.id }}/delete" class="govuk-link">Delete Task</a><br>
+  <a href="/tasks" class="govuk-link">Back to Task List</a>
+{% endblock %}

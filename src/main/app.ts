@@ -19,7 +19,7 @@ app.locals.ENV = env;
 
 new Nunjucks(developmentMode).enableFor(app);
 
-app.use(favicon(path.join(__dirname, '/public/assets/images/favicon.ico')));
+app.use(favicon(path.join(__dirname, '..', 'main', 'public', 'assets', 'images', 'favicon.ico')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -40,8 +40,8 @@ setupDev(app, developmentMode);
 app.use((err: HTTPError, req: express.Request, res: express.Response) => {
   console.log(err);
   // set locals, only providing error in development
-  res.locals.message = err.message;
+  res.locals.message = err?.message || 'An unknown error occured';
   res.locals.error = env === 'development' ? err : {};
-  res.status(err.status || 500);
+  res.status(err?.status || 500);
   res.render('error');
 });

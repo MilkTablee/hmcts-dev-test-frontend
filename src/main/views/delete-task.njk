@@ -1,0 +1,23 @@
+{% extends "template.njk" %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">Delete Task</h1>
+
+  <p class="govuk-body">Are you sure you want to delete this task?</p>
+  <div class="govuk-summary-list">
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">Case Number</dt>
+      <dd class="govuk-summary-list__value">{{ task.caseNumber }}</dd> <!-- Updated -->
+    </div>
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">Title</dt>
+      <dd class="govuk-summary-list__value">{{ task.title }}</dd>
+    </div>
+  </div>
+
+  <form action="/tasks/{{ task.id }}/delete" method="POST">
+    <button type="submit" class="govuk-button govuk-button--warning">Yes, Delete</button>
+  </form>
+
+  <a href="/tasks" class="govuk-link">Cancel</a>
+{% endblock %}
